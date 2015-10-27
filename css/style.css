@@ -1,0 +1,103 @@
+body {
+    padding:0;
+    margin:0;
+    text-align:center;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+#top-frame {
+    margin-left: 150px;
+    margin-right:200px;
+    margin-top: 35px;
+    border-bottom: 1px solid #b7b7b7;
+    text-align:left;
+}
+
+#main-frame {
+    margin-right:200px;
+    margin-left: 150px;
+    margin-top: 30px;
+}
+
+#debug-frame {
+    margin-right:200px;
+    margin-left: 150px;
+    margin-top: 30px;
+}
+
+#error-frame {
+    margin-right:200px;
+    margin-left: 150px;
+    margin-top: 30px;
+}
+/*-----------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------*/
+.no-close .ui-dialog-titlebar-close {display:none;}
+.dialog-container-static > .ui-dialog{position:static;}
+/*-----------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------*/
+.form-table {
+    width:100%;
+    border-collapse:collapse;
+}
+
+.form-table th, .form-table td {
+    padding:5px;
+}
+
+.form-table th {
+    text-align: center;
+    background:#7fbbfa;
+    color: #ffffff;
+}
+
+.form-table tr.error {
+    border: 1px solid red;
+}
+
+.label {text-align:right;font-weight:bold;margin-left:5px;}
+
+.icon-invalid, .invalid{
+    display:inline-block;
+    padding:0px;
+    margin-left: 5px;
+    width:16px;
+    height:16px;
+    background:url(../images/icon-check.png) 0px 0px no-repeat;
+}
+.icon-valid, .valid{
+    display:inline-block;
+    padding:0px;
+    margin-left: 5px;
+    width:16px;
+    height:16px;
+    background:url(../images/icon-check.png) -16px 0px no-repeat;
+}
+
+.icon-ajax{
+    display:inline-block;
+    padding:0px;
+    margin-left: 5px;
+    width:16px;
+    height:16px;
+    background:url(../images/ajax-loader.gif) 0px 0px no-repeat;
+}
+
+button.icon-button {
+    margin-left: 20px;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+button span.ui-icon {
+    float: left;
+    margin: 0 4px;
+}
+
+
+/*-----------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------*/
