@@ -1,5 +1,5 @@
 <?php
-namespace Tuny\HttpBase;
+namespace Tiny\HttpBase;
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +10,9 @@ class Request {
     public $query;
     public $cookies;
     public function __construct() {
+        ;
+    }
+    public function GetFromGlobals(){
         ;
     }
 }
