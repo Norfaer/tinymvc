@@ -1,2 +1,2 @@
 <?php
-echo __DIR__ ;
+print_r($_SERVER);

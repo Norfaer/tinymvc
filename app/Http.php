@@ -10,10 +10,12 @@ class Request {
     public $query;
     public $cookies;
     public function __construct() {
-        ;
+        $query = [];
+        $cookies=  [];
+        $attributes = [];
     }
     public function GetFromGlobals(){
-        ;
+        $this->attributes['method']=$_SERVER['REQUEST_METHOD'];
     }
 }
 
