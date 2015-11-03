@@ -1,5 +1,5 @@
 <?php
-chdir(dirname(__DIR__));
+chdir(__DIR__);
 require_once 'app/Application.php';
 
 use Tiny\Application\Application;
