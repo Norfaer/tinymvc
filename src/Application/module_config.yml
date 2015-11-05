@@ -1,0 +1,4 @@
+---
+routes:
+    Index: {default : yes}
+    Module1:

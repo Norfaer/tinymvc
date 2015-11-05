@@ -6,16 +6,30 @@ namespace Tiny\HttpBase;
  * and open the template in the editor.
  */
 class Request {
-    public $attributes;
-    public $query;
-    public $cookies;
+//  Параметры, которые нам могут понадобиться
+    public $Post;           // Post переменные 
+    public $Get;            // Get переменные
+    public $Cookie;        // Куки
+    public $Files;          // Загружаемые файлы
+    public $RequestMethod;  // Метод запроса: Get, Post, Put, Head
+    public $RemoteAddr;     // Адрес клиента
+    public $RemotePort;     // Порт клиента
+    public $Uri;            // Запрашиваемый ресурс
+    public $QueryString;    // Строка запроса
+
+//  Конструктор
     public function __construct() {
-        $query = [];
-        $cookies=  [];
-        $attributes = [];
+        
     }
     public function GetFromGlobals(){
-        $this->attributes['method']=$_SERVER['REQUEST_METHOD'];
+        $this->RequestMethod=$_SERVER['REQUEST_METHOD'];
+        $this->RemoteAddr=$_SERVER['REMOTE_ADDR'];
+        $this->RemotePort=$_SERVER['REMOTE_PORT'];
+        $this->Uri=$_SERVER['REQUEST_URI'];
+        $this->QueryString=$_SERVER['QUERY_STRING'];
+        $this->Post=$_POST;
+        $this->Get=$GET;
+        $this->Cookie=$_COOKIE;
     }
 }
 

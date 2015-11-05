@@ -8,23 +8,27 @@ namespace Tiny\Application;
 require_once "app/Http.php";
 require_once "app/Session.php";
 require_once "app/Utils.php";
+require_once "app/Spyc.php";
+
+use Tiny\HttpBase\Request;
 
 class Application
 {
     private $config;
     public function __construct() {
-        $config=[];
+        $this->config=["Main"=>[],"ClassMap"=>[],"Routemap"=>[]];
     }
     public function init() {
-//      $this->config=(include "config/config.php");
-        $this->config=yaml_parse(include "config/config.php");
-        $modules=$this->config["modules"];
-        foreach ($modules as $modulename) {
-            $this->config=  array_merge_r($this->config, include ("src/".$modulename."/module_config.php"));
+        $this->config["Main"] = spyc_load_file("config/config.yml");
+        foreach($this->config["Main"]["modules"] As $modulename => &$moduleconfig) {
+            if (!isset($moduleconfig["default"])) $moduleconfig["default"]=false;
+            if (!isset($moduleconfig["path"])) $moduleconfig["path"]="src/".$modulename.'/';
         }
     }
     public function run() {
-        
-        print_r($this->config);
+        $request= new Request();
+        $request->GetFromGlobals();
+        print_r($this->config["Main"]);
+        var_dump($this->config["Main"]["modules"]);
     }
 }
