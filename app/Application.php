@@ -7,28 +7,49 @@ namespace Tiny\Application;
  */
 require_once "app/Http.php";
 require_once "app/Session.php";
-require_once "app/Utils.php";
+require_once "app/Router.php";
+//require_once "app/Utils.php";
 require_once "app/Spyc.php";
 
 use Tiny\HttpBase\Request;
+use Tiny\Router\Router;
+
 
 class Application
 {
     private $config;
     public function __construct() {
-        $this->config=["Main"=>[],"ClassMap"=>[],"Routemap"=>[]];
+        $this->config=["Main"=>[],"ClassMap"=>[],"RouteMap"=>[]];
     }
-    public function init() {
-        $this->config["Main"] = spyc_load_file("config/config.yml");
+    public function init($config_file="config/config.yml") {
+        ini_set('xdebug.var_display_max_depth', 5);
+        ini_set('xdebug.var_display_max_children', 256);
+        ini_set('xdebug.var_display_max_data', 1024);
+        $this->config["Main"] = spyc_load_file($config_file);
         foreach($this->config["Main"]["modules"] As $modulename => &$moduleconfig) {
             if (!isset($moduleconfig["default"])) $moduleconfig["default"]=false;
             if (!isset($moduleconfig["path"])) $moduleconfig["path"]="src/".$modulename.'/';
+            $tempconfig = spyc_load_file($moduleconfig["path"]."module_config.yml");
+            foreach ($tempconfig['routes'] As $key => $val){
+                $this->config["RouteMap"][$modulename."/".$key]=$modulename."/".$val["controller"];
+                if (isset($val['default']) && ($val['default']===true)) {
+                    $this->config["RouteMap"][$modulename.'/default']=$modulename."/".$val["controller"];
+                    if ($moduleconfig["default"]) $this->config["RouteMap"]["default/default"]=$modulename."/".$val["controller"]; 
+                }
+            }
+            foreach ($tempconfig['classmap'] As $key => $val){
+                $this->config["ClassMap"][$modulename."/".$key]=$moduleconfig["path"].$val;
+            }
         }
     }
     public function run() {
-        $request= new Request();
+        $request = new Request();
         $request->GetFromGlobals();
-        print_r($this->config["Main"]);
-        var_dump($this->config["Main"]["modules"]);
+        $router = new Router();
+        $router->init($this->config["RouteMap"]);
+        $router->RouteURI($request->Uri);
+        var_dump($request);
+        var_dump($router);
+        var_dump($this->config);
     }
 }

@@ -5,4 +5,4 @@ routes:
 
 classmap:
     IndexController : IndexController.php
-    Controller1 : Controller1.php
+    InstallController : InstallController.php
