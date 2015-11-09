@@ -21,7 +21,7 @@ class Application
     public function __construct() {
         $this->config=["Main"=>[],"ClassMap"=>[],"RouteMap"=>[]];
     }
-    public function init($config_file="config/config.yml") {
+    public function Init($config_file="config/config.yml") {
         ini_set('xdebug.var_display_max_depth', 5);
         ini_set('xdebug.var_display_max_children', 256);
         ini_set('xdebug.var_display_max_data', 1024);
@@ -42,14 +42,11 @@ class Application
             }
         }
     }
-    public function run() {
+    public function Run() {
         $request = new Request();
         $request->GetFromGlobals();
         $router = new Router();
-        $router->init($this->config["RouteMap"]);
+        $router->Init($this->config["RouteMap"]);
         $router->RouteURI($request->Uri);
-        var_dump($request);
-        var_dump($router);
-        var_dump($this->config);
     }
 }

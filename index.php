@@ -5,6 +5,6 @@ require_once 'app/Application.php';
 use Tiny\Application\Application;
 
 $app = new Application();
-$app->init();
-$app->run();
+$app->Init();
+$app->Run();
 

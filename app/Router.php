@@ -14,6 +14,8 @@ class Router {
         $this->RouteMap=$RouteMap;
     }
     public function RouteURI($URI) {
-        
+        $re = "/^(?:(?:\\/(?<module>\\w*))(?:(?:\\/(?<controller>\\w*))|(?:))(?:(?:\\/(?<action>\\w*))|(?:)))(?:\\?(?<query>.*)|)$/"; 
+        preg_match($re, $URI, $matches);
+        var_dump($matches);
     }
 }
