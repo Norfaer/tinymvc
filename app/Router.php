@@ -6,7 +6,10 @@ namespace Tiny\Router;
  * and open the template in the editor.
  */
 class Router {
-    public $RouteMap;
+    private $RouteMap;
+    public $Controller;
+    public $Action;
+    public $QueryString;
     public function __construct() {
         ;
     }
@@ -16,6 +19,11 @@ class Router {
     public function RouteURI($URI) {
         $re = "/^(?:(?:\\/(?<module>\\w*))(?:(?:\\/(?<controller>\\w*))|(?:))(?:(?:\\/(?<action>\\w*))|(?:)))(?:\\?(?<query>.*)|)$/"; 
         preg_match($re, $URI, $matches);
-        var_dump($matches);
+        $ModuleName = empty($matches['module'])?'default':$matches['module'];
+        $ControllerName = empty($matches['controller'])?'default':$matches['controller'];
+        $this->Action = empty($matches['action'])?'DefaultAction':$matches['action'];
+        $this->QueryString = empty($matches['query'])?"":$matches['query'];
+        $this->Module=$ModuleName;
+        $this->Controller=$this->RouteMap[$ModuleName."/".$ControllerName];
     }
 }

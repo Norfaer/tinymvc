@@ -19,7 +19,7 @@ class Request {
 
 //  Конструктор
     public function __construct() {
-        
+        $this->Post=[];$this->Get=[];$this->Files=[];$this->Cookie=[];
     }
     public function GetFromGlobals(){
         $this->RequestMethod=$_SERVER['REQUEST_METHOD'];
@@ -28,7 +28,7 @@ class Request {
         $this->Uri=$_SERVER['REQUEST_URI'];
         $this->QueryString=$_SERVER['QUERY_STRING'];
         $this->Post=$_POST;
-        $this->Get=$GET;
+        $this->Get=$_GET;
         $this->Cookie=$_COOKIE;
     }
 }
