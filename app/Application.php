@@ -20,7 +20,6 @@ use Tiny\Autoloader\AutoLoader;
 
 class Application
 {
-    private $config;
     private $AutoLoader;
     private $Router;
     private $Module;
@@ -38,32 +37,20 @@ class Application
         ini_set('xdebug.var_display_max_data', 1024);
         $session = new Session();
         $session->start();
-        $this->config["Main"] = spyc_load_file($config_file);
-        foreach($this->config["Main"]["modules"] As $modulename => &$moduleconfig) {
-            if (!isset($moduleconfig["default"])) $moduleconfig["default"]=false;
-            if (!isset($moduleconfig["path"])) $moduleconfig["path"]="src/".$modulename.'/';
-            $tempconfig = spyc_load_file($moduleconfig["path"]."module_config.yml");
-            foreach ($tempconfig['routes'] As $key => $val){
-                $this->config["RouteMap"][$modulename."/".$key]=$modulename."\\".$val["controller"];
-                if (isset($val['default']) && ($val['default']===true)) {
-                    $this->config["RouteMap"][$modulename.'/default']=$modulename."\\".$val["controller"];
-                    if ($moduleconfig["default"]) $this->config["RouteMap"]["default/default"]=$modulename."\\".$val["controller"]; 
-                }
-            }
-            foreach ($tempconfig['classmap'] As $key => $val){
-                $this->config["ClassMap"][$modulename."\\".$key]=$moduleconfig["path"]."controller/".$val;
-            }
-        }
     }
     public function Run() {
-        $request = new Request();
-        $request->GetFromGlobals();
-        $router = new Router();
-        $router->Init($this->config["RouteMap"]);
-        $router->RouteURI($request->Uri);
-        require_once($this->config["ClassMap"][$router->Controller]);
-        $controller = new $router->Controller;
-        $action = $router->Action;
-        $controller->$action();
+        $this->AutoLoader=new AutoLoader;
+        $this->AutoLoader->LoadConfig();
+        $this->AutoLoader->LoadModule("Application");
+        var_dump($this->AutoLoader);
+//        $request = new Request();
+//        $request->GetFromGlobals();
+//        $router = new Router();
+//        $router->Init($this->config["RouteMap"]);
+//        $router->RouteURI($request->Uri);
+//        require_once($this->config["ClassMap"][$router->Controller]);
+//        $controller = new $router->Controller;
+//        $action = $router->Action;
+//        $controller->$action();
     }
 }

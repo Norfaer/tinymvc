@@ -1,8 +1,8 @@
 ---
-routes:
+Routes:
     Index: {controller: IndexController , default: yes}
     Install: {controller: InstallController}
 
-classmap:
+Controllers:
     IndexController : IndexController.php
     InstallController : InstallController.php

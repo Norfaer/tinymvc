@@ -1,6 +1,8 @@
 <?php
 chdir(__DIR__);
+
 require_once 'app/Application.php';
+
 
 use Tiny\Application\Application;
 

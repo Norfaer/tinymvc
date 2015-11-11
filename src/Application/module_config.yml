@@ -1,9 +1,11 @@
 ---
-routes:
+Routes:
     Index: {controller: IndexController , default: yes}
     Install: {controller: InstallController}
 
-classmap:
+Controllers:
     IndexController : IndexController.php
     Controller1 : Controller1.php
-    
+
+Views:
+    MainView: MainView.phtml
