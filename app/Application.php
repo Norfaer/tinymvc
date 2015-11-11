@@ -42,12 +42,14 @@ class Application
         $this->AutoLoader=new AutoLoader;
         $this->AutoLoader->LoadConfig();
         $this->AutoLoader->LoadModule("Application");
+        $request = new Request();
+        $request->GetFromGlobals();
+        $router = new Router();
+        $router->Init($this->AutoLoader->GetRouteMap());
+        $router->RouteURI($request->Uri);
+        
         var_dump($this->AutoLoader);
-//        $request = new Request();
-//        $request->GetFromGlobals();
-//        $router = new Router();
-//        $router->Init($this->config["RouteMap"]);
-//        $router->RouteURI($request->Uri);
+        var_dump($router);
 //        require_once($this->config["ClassMap"][$router->Controller]);
 //        $controller = new $router->Controller;
 //        $action = $router->Action;

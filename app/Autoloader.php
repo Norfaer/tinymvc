@@ -16,6 +16,11 @@ class AutoLoader
     public function __construct() {
         $this->ClassMap=[];$this->ModuleMap=[];$this->RouteMap=[];$this->ViewMap=[];
     }
+    
+    public function GetRouteMap(){
+        return $this->RouteMap;
+    }
+        
     public function LoadClass($classname) {
         
     }

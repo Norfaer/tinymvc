@@ -7,6 +7,7 @@ namespace Tiny\Router;
  */
 class Router {
     private $RouteMap;
+    public $Module;
     public $Controller;
     public $Action;
     public $QueryString;
@@ -17,13 +18,15 @@ class Router {
         $this->RouteMap=$RouteMap;
     }
     public function RouteURI($URI) {
-        $re = "/^(?:(?:\\/(?<module>\\w*))(?:(?:\\/(?<controller>\\w*))|(?:))(?:(?:\\/(?<action>\\w*))|(?:)))(?:\\?(?<query>.*)|)$/"; 
-        preg_match($re, $URI, $matches);
-        $ModuleName = empty($matches['module'])?'default':$matches['module'];
-        $ControllerName = empty($matches['controller'])?'default':$matches['controller'];
-        $this->Action = empty($matches['action'])?'DefaultAction':$matches['action'];
-        $this->QueryString = empty($matches['query'])?"":$matches['query'];
-        $this->Module=$ModuleName;
-        $this->Controller=$this->RouteMap[$ModuleName."/".$ControllerName];
+        $re = "/^(?:(?:(?:\\/([^\\/\\?]\\w*))|(?:))(?:(?:\\/([^\\/\\?]\\w*))|(?:))(?:(?:\\/([^\\/\\?]\\w*))|(?:)))(?:(?:(?:\\?|\\/\\?)(.*))|)$/"; 
+////    $re = "/^(\\/[\\w\\/]*)(?:(\\?.*)|)$/"; 
+        if (preg_match($re, $URI, $matches)) {
+            $this->Module=isset($matches[1])? $matches[1]:"";;
+            $this->Controller=isset($matches[2])? $matches[2]:"";
+            $this->Action = isset($matches[3])? $matches[3]:"";
+            $this->QueryString = isset($matches[4])? $matches[4]:"";
+            return true;
+        }
+        else return false;
     }
 }
