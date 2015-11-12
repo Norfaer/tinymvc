@@ -7,26 +7,40 @@ namespace Tiny\Router;
  */
 class Router {
     private $RouteMap;
-    public $Module;
-    public $Controller;
-    public $Action;
+    private $AutoLoader;
+    public $ModuleRoute;
+    public $ControllerRoute;
+    public $ActionRoute;
     public $QueryString;
     public function __construct() {
-        ;
-    }
-    public function init($RouteMap) {
-        $this->RouteMap=$RouteMap;
+        global $AutoLoader;
+        $this->AutoLoader=$AutoLoader;
     }
     public function RouteURI($URI) {
-        $re = "/^(?:(?:(?:\\/([^\\/\\?]\\w*))|(?:))(?:(?:\\/([^\\/\\?]\\w*))|(?:))(?:(?:\\/([^\\/\\?]\\w*))|(?:)))(?:(?:(?:\\?|\\/\\?)(.*))|)$/"; 
-////    $re = "/^(\\/[\\w\\/]*)(?:(\\?.*)|)$/"; 
-        if (preg_match($re, $URI, $matches)) {
-            $this->Module=isset($matches[1])? $matches[1]:"";;
-            $this->Controller=isset($matches[2])? $matches[2]:"";
-            $this->Action = isset($matches[3])? $matches[3]:"";
-            $this->QueryString = isset($matches[4])? $matches[4]:"";
-            return true;
+        $route_reg_exp = "/^\\/(?:(\\w+)|(\\w+)\\/(?:(\\w+)|(\\w+)\\/(?:(\\w+)|)|)|)(?:\\?(\\w*)|)$/";  
+        if (preg_match($route_reg_exp, $URI, $matches)) {
+            var_dump($matches);
+            $this->ModuleRoute = !empty($matches[1])? $matches[1] : $this->AutoLoader->GetDefaultModule();
+            $this->ModuleRoute = !empty($matches[2])? $matches[2] : $this->ModuleRoute;
+            $this->ControllerRoute = !empty($matches[3])? $matches[3] : "";
+            $this->ControllerRoute = !empty($matches[4])? $matches[4] : $this->ControllerRoute;
+            $ActionName = !empty($matches[5])? $matches[5] : "DefaultAction";
+            $this->QueryString = !empty($matches[6])? $matches[6] : "";
+            $route = $this->ModuleRoute."/".$this->ControllerRoute;
+            if ($this->AutoLoader->ModuleExist($this->ModuleRoute)) {
+                $this->AutoLoader->LoadModule($this->ModuleRoute);
+                $this->RouteMap = $this->AutoLoader->GetRouteMap();
+                if ($this->AutoLoader->RouteExist($route)) {
+                    $ClassName=$this->RouteMap[$route];
+                    $this->AutoLoader->LoadClass($ClassName);
+                    $CtrlObj = new $ClassName;
+                    if ($CtrlObj->HasAction($ActionName)){
+                        $CtrlObj->$ActionName();
+                        return true;
+                    }
+                }
+            }
         }
-        else return false;
+        return false;
     }
 }

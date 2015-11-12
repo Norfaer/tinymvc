@@ -16,15 +16,42 @@ class AutoLoader
     public function __construct() {
         $this->ClassMap=[];$this->ModuleMap=[];$this->RouteMap=[];$this->ViewMap=[];
     }
-    
-    public function GetRouteMap(){
+    public function ModuleExist($module) {
+        foreach ($this->ModuleMap As $key => $value){
+            if ($module==$key) {return true;}
+        }
+        return false;
+    }
+    public function ControllerExist($controller){
+        foreach ($this->ClassMap As $key => $value){
+            if ($controller==$key) {return true;}
+        }
+        return false;
+    }
+    public function RouteExist($route) {
+        foreach ($this->RouteMap As $key => $value){
+            if ($route==$key) {return true;}
+        }
+        return false;
+    }
+    public function GetRouteMap() {
         return $this->RouteMap;
     }
-        
-    public function LoadClass($classname) {
-        
+    public function GetDefaultModule() {
+        foreach($this->ModuleMap As $modulename => $moduleparams) {
+            if ($moduleparams['default']) {return $modulename;}
+        }
+        return "";
     }
-    public function LoadModule($modulename) {
+    public function LoadClass($classname) {
+        if (isset($this->ClassMap[$classname])) {
+            require_once($this->ClassMap[$classname]);
+            return true;
+        }
+        return false;
+    }
+    public function LoadModule($module="") {
+        $modulename = $module=="" ? $this->GetDefaultModule() : $module;
         $temp = spyc_load_file($this->ModuleMap[$modulename]["path"]."/module_config.yml");
         foreach ($temp["Controllers"] As $classname => $classfile){
             $this->ClassMap[$this->ModuleMap[$modulename]["namespace"]."\\".$classname]=$this->ModuleMap[$modulename]["controller_path"]."/".$classfile;
@@ -47,6 +74,7 @@ class AutoLoader
             $this->ModuleMap[$modulename]["namespace"]=isset($moduleparams["namespace"]) ? $moduleparams["namespace"]:"Module\\".$modulename;
         }
     }
-    public function ValidateConfig($config){
+    public function ValidateConfig($config) {
     }
 }
+$AutoLoader = new AutoLoader();

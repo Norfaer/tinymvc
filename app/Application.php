@@ -16,43 +16,30 @@ require_once "app/Spyc.php";
 use Tiny\HttpBase\Request;
 use Tiny\Router\Router;
 use Tiny\Session\Session;
-use Tiny\Autoloader\AutoLoader;
 
 class Application
 {
     private $AutoLoader;
     private $Router;
-    private $Module;
-    private $Controller;
-    private $Action;
     private $Request;
     private $Response;
-    public function __construct() {
-        $this->config=["Main"=>[],"ClassMap"=>[],"RouteMap"=>[]];
-    }
-    public function Init($config_file="config/config.yml") {
+    public function __construct($config_path="config/config.yml") {
+        global $AutoLoader;
+        $this->AutoLoader=$AutoLoader;
         ini_set('display_errors',1);
         ini_set('xdebug.var_display_max_depth', 5);
         ini_set('xdebug.var_display_max_children', 256);
         ini_set('xdebug.var_display_max_data', 1024);
-        $session = new Session();
-        $session->start();
+    }
+    public function Init() {
     }
     public function Run() {
-        $this->AutoLoader=new AutoLoader;
+        $session = new Session();
+        $session->start();
         $this->AutoLoader->LoadConfig();
-        $this->AutoLoader->LoadModule("Application");
         $request = new Request();
         $request->GetFromGlobals();
         $router = new Router();
-        $router->Init($this->AutoLoader->GetRouteMap());
         $router->RouteURI($request->Uri);
-        
-        var_dump($this->AutoLoader);
-        var_dump($router);
-//        require_once($this->config["ClassMap"][$router->Controller]);
-//        $controller = new $router->Controller;
-//        $action = $router->Action;
-//        $controller->$action();
     }
 }
