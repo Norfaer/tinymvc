@@ -5,7 +5,7 @@ namespace Tiny\Autoloader;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once 'app/Spyc.php';
+include_once 'app/Spyc.php';
 
 class AutoLoader
 {
@@ -42,6 +42,9 @@ class AutoLoader
             if ($moduleparams['default']) {return $modulename;}
         }
         return "";
+    }
+    public function GetViewPath($view) {
+        return $this->ViewMap[$view];
     }
     public function LoadClass($classname) {
         if (isset($this->ClassMap[$classname])) {

@@ -6,13 +6,32 @@ namespace Tiny\MVCBase;
  * and open the template in the editor.
  */
 abstract class AbstractController {
-    public $actions=[];
+    public $Response;
+    public $AutoLoader;
+    public $Actions=[];
     abstract public function DefaultAction();
+    public function __construct() {
+        global $Response, $AutoLoader;
+        $this->AutoLoader = $AutoLoader;
+        $this->Response = $Response;        
+    }
     public function HasAction($action){
-        foreach($this->actions As $value) {
+        foreach($this->Actions As $value) {
             if (($value==$action)&&(method_exists($this, $value))) return true;
         }
         return false;
+    }
+}
+
+abstract class AbstractModelView {
+    public $Data;
+    public $ViewPath;
+    public function Send(){
+        require($this->ViewPath);
+    }
+    public function SetTemplate($view){
+        global $AutoLoader;
+        $this->ViewPath=$AutoLoader->GetViewPath($view);
     }
 }
 

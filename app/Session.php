@@ -186,8 +186,10 @@ class Session
         }
         return true;
     }
-    public function start() {
+    public function Start() {
         session_start();
     }
     
 }
+
+$Session = new Session();

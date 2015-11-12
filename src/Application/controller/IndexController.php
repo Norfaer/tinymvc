@@ -5,18 +5,28 @@ namespace Module\Application;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once "app/MVCBase.php";
+include_once "app/MVCBase.php";
 
 use Tiny\MVCBase\AbstractController;
+use Tiny\MVCBase\AbstractModelView;
 
 class IndexController extends AbstractController {
+    public $ModelView;
     public function __construct() {
-        $this->actions=["DefaultAction","Index","Error404","Error503"];
+        parent::__construct();
+        $this->Actions = ["DefaultAction","Index","Error404","Error503"];
     }
     public function DefaultAction() {
         $this->Index();
     }
     public function Index() {
-        echo "Hello Index Controller Module Application";
+        $this->ModelView = new IndexModelView;
+        $this->Response->Send();
+        $this->ModelView->SetTemplate("MainView");
+        $this->ModelView->Send();
     }
+}
+
+
+class IndexModelView extends AbstractModelView{
 }

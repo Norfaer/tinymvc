@@ -19,7 +19,6 @@ class Router {
     public function RouteURI($URI) {
         $route_reg_exp = "/^\\/(?:(\\w+)|(\\w+)\\/(?:(\\w+)|(\\w+)\\/(?:(\\w+)|)|)|)(?:\\?(\\w*)|)$/";  
         if (preg_match($route_reg_exp, $URI, $matches)) {
-            var_dump($matches);
             $this->ModuleRoute = !empty($matches[1])? $matches[1] : $this->AutoLoader->GetDefaultModule();
             $this->ModuleRoute = !empty($matches[2])? $matches[2] : $this->ModuleRoute;
             $this->ControllerRoute = !empty($matches[3])? $matches[3] : "";

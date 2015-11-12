@@ -5,6 +5,16 @@ namespace Tiny\HttpBase;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+define("HSTATUS_OK","200 OK");
+define("HSTATUS_NOTFOUND","404 Not Found");
+define("HSTATUS_FORBIDDEN","403 Forbidden");
+
+define("HCTYPE_HTML","text/html");
+define("HCTYPE_JSON","application/json");
+
+define("CACHE_OFF","no-store, no-cache, must-revalidate");
+define("CACE_STD","public, max-age=86400");
+
 class Request {
 //  Параметры, которые нам могут понадобиться
     public $Post;           // Post переменные 
@@ -34,5 +44,31 @@ class Request {
 }
 
 class Response {
-    
+    private $Status;
+    private $CacheControl;
+    private $ContentType;
+    public function __construct() {
+        $this->Status = HSTATUS_OK; 
+        $this->ContentType = HCTYPE_HTML;
+        $this->CacheControl = CACHE_OFF;
+    }
+    public function Send(){
+        header("Content-Type: ".$this->ContentType);
+        header("Cache-Control: ".$this->CacheControl);
+        header("HTTP/1.x ".$this->Status);
+        header("Status: ".$this->Status);
+    }
+    public function SetStatus($status) {
+        $this->Status = $status;
+    }
+    public function SetCache($cache) {
+        $this->CacheControl = $cache;
+    }
+    public function SetContentType($ctype) {
+        $this->ContentType = $ctype;
+    }
+
 }
+
+$Request = new Request();
+$Response = new Response();

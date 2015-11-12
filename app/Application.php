@@ -5,13 +5,13 @@ namespace Tiny\Application;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once "app/Http.php";
-require_once "app/Session.php";
-require_once "app/Router.php";
-require_once "app/Session.php";
-require_once "app/Autoloader.php";
+include_once "app/Http.php";
+include_once "app/Session.php";
+include_once "app/Router.php";
+include_once "app/Session.php";
+include_once "app/Autoloader.php";
 //require_once "app/Utils.php";
-require_once "app/Spyc.php";
+include_once "app/Spyc.php";
 
 use Tiny\HttpBase\Request;
 use Tiny\Router\Router;
@@ -23,23 +23,23 @@ class Application
     private $Router;
     private $Request;
     private $Response;
+    private $Session;
     public function __construct($config_path="config/config.yml") {
-        global $AutoLoader;
-        $this->AutoLoader=$AutoLoader;
+        global $AutoLoader, $Request, $Response, $Session;
+        $this->AutoLoader = $AutoLoader;
+        $this->Request = $Request;
+        $this->Response = $Response;
+        $this->Session = $Session;
         ini_set('display_errors',1);
         ini_set('xdebug.var_display_max_depth', 5);
         ini_set('xdebug.var_display_max_children', 256);
         ini_set('xdebug.var_display_max_data', 1024);
     }
-    public function Init() {
-    }
     public function Run() {
-        $session = new Session();
-        $session->start();
+        $this->Request->GetFromGlobals();
         $this->AutoLoader->LoadConfig();
-        $request = new Request();
-        $request->GetFromGlobals();
-        $router = new Router();
-        $router->RouteURI($request->Uri);
+        $this->Session->Start();
+        $this->Router = new Router();
+        $this->Router->RouteURI($this->Request->Uri);
     }
 }

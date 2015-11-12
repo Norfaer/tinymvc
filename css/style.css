@@ -66,7 +66,7 @@ body {
     margin-left: 5px;
     width:16px;
     height:16px;
-    background:url(../images/icon-check.png) 0px 0px no-repeat;
+    background:url(../img/icon-check.png) 0px 0px no-repeat;
 }
 .icon-valid, .valid{
     display:inline-block;
@@ -74,7 +74,7 @@ body {
     margin-left: 5px;
     width:16px;
     height:16px;
-    background:url(../images/icon-check.png) -16px 0px no-repeat;
+    background:url(../img/icon-check.png) -16px 0px no-repeat;
 }
 
 .icon-ajax{
@@ -83,7 +83,7 @@ body {
     margin-left: 5px;
     width:16px;
     height:16px;
-    background:url(../images/ajax-loader.gif) 0px 0px no-repeat;
+    background:url(../img/ajax-loader.gif) 0px 0px no-repeat;
 }
 
 button.icon-button {
