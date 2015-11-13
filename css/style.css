@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+
 body {
     padding:0;
     margin:0;
@@ -17,7 +20,6 @@ body {
 #main-frame {
     margin-right:200px;
     margin-left: 150px;
-    margin-top: 30px;
 }
 
 #debug-frame {
@@ -97,7 +99,113 @@ button span.ui-icon {
     margin: 0 4px;
 }
 
+/* Giving a background-color to the nav container. */
+nav { 
+        zoom: 1;
+	font-family: 'Open Sans', sans-serif;
+        margin:10px 0;
+        height: 40px;
+	background-color: #009ED8;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        border: 1px solid #0084D6;
+        -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+        display:inline-block;
+}
 
+/* Since we'll have the "ul li" "float:left"
+ * we need to add a clear after the container. */
+
+nav:after {
+	content:"";
+	display:table;
+	clear:both;
+}
+
+/* Removing padding, margin and "list-style" from the "ul",
+ * and adding "position:reltive" */
+nav ul {
+	padding-left:0;
+	margin:0;
+	list-style: none;
+	position: relative;
+        display: inline-block;
+}
+/* Positioning the navigation items inline */
+nav ul li {
+	margin: 0px;
+	display:inline-block;
+	float: left;
+	background-color: #009ED8;
+        border-right: 1px solid #7AB3D3; 
+	}
+
+/* Styling the links */
+nav a {
+	display:block;
+	padding:0 10px;	
+	color:#FFF;
+	font-size:20px;
+	line-height: 40px;
+	text-decoration:none;
+        border-right: 1px solid #0084D6;
+}
+
+
+
+
+/* Background color change on Hover */
+nav a:hover { 
+	background-color: #FFFFFF;
+        color: #009ED8;
+}
+
+nav a span {
+    float:right;
+}
+
+/* Hide Dropdowns by Default
+ * and giving it a position of absolute */
+nav ul ul {
+        text-align:left;
+	display: none;
+	position: absolute; 
+	/* has to be the same number as the "line-height" of "nav a" */
+	top: 40px; 
+}
+	
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+	display:inherit;
+}
+	
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+	width:170px;
+	float:none;
+	display:list-item;
+	position: relative;
+}
+
+/* Second, Third and more Tiers	
+ * We move the 2nd and 3rd etc tier dropdowns to the left
+ * by the amount of the width of the first tier.
+*/
+nav ul ul ul li {
+	position: relative;
+	top:-40px;
+	/* has to be the same number as the "width" of "nav ul ul li" */ 
+	left:170px; 
+}
+
+	
+/* Change ' +' in order to change the Dropdown symbol 
+li.rootmenu > a:after { content:  "\25be"; }
+li > a:after { content:  "\25b8"; }
+li > a:only-child:after { content: ''; }
 /*-----------------------------------------------------------------
 -------------------------------------------------------------------
 -------------------------------------------------------------------*/

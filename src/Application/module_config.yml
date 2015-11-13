@@ -9,3 +9,5 @@ Controllers:
 
 Views:
     MainView: MainView.phtml
+    ContentView: ContentView.phtml
+    NavView: NavView.phtml
