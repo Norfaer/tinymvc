@@ -2,6 +2,7 @@
 <html>
     <head>
         <link type="text/css" href="css/style.css" rel="stylesheet" media="screen" charset="utf-8" />
+        <link type="text/css" href="css/fontello.css" rel="stylesheet" media="screen" charset="utf-8" />
         <link type="text/css" href="css/jquery-ui.css" rel="stylesheet" />
         <title>Knauf Order Desk</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -14,17 +15,25 @@
         <script type="text/javascript" src="js/ajax.js"></script>
     </head>
     <body>
-        <div id="top-frame">
-            <img src="./img/logo.gif" align="middle"/>
-        </div>
-        <div id="loader-block" style="display: none;">
-        </div>
-        <div id="main-frame">
+        <div id="page-wrapper">
+            <div id="top-frame">
+                <img src="./img/logo.gif" align="top"/>
+                <img src="./img/logo.png" align="top"/>
+                <div id="auth-frame">
+                    <div id="company-tag">ООО "ИнтерСервис"</div>
+                    <div id="user-tag"><i class="icon-male"></i>г-н Петренко В.А.</div>
+                    <div><a href="#"><i class="icon-logout"></i>Выйти</a></div>
+                </div>
+            </div>
+            <div id="loader-block" style="display: none;">
+            </div>
+            <div id="main-frame">
+            </div>
         </div>
         <script>
             $(document).ready(function(){
                 $("#loader").show();
-                $("#main-frame").load("/Application/Index/ShowContent",function(){$("#loader").hide();});			
+                $("#main-frame").load("/Application/Content",function(){$("#loader").hide();});			
           });
 	</script>
     </body>

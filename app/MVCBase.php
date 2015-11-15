@@ -25,14 +25,18 @@ abstract class AbstractController {
 
 abstract class AbstractModelView {
     public $Data;
+    public $ViewData;
     public $ViewPath;
     public $Response;
     public $AutoLoader;
+    abstract public function InitData();
     abstract public function ProcessData();
     public function __construct() {
         global $Response, $AutoLoader;
         $this->AutoLoader = $AutoLoader;
-        $this->Response = $Response;        
+        $this->Response = $Response;
+        $this->Data=[];
+        $this->ViewData=[];
     }
     public function SendHtml($view_template,$send_header = true){
         $this->ViewPath=$this->AutoLoader->GetViewPath($view_template);
@@ -41,6 +45,7 @@ abstract class AbstractModelView {
             $this->Response->SetContentType(HCTYPE_HTML);
             $this->Response->Send();
         }
+        extract($this->ViewData);
         require($this->ViewPath);
     }
     public function SendJson(){

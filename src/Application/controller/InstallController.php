@@ -10,7 +10,7 @@ include_once "app/MVCBase.php";
 use Tiny\MVCBase\AbstractController;
 use Tiny\MVCBase\AbstractModelView;
 
-class IndexController extends AbstractController {
+class InstallController extends AbstractController {
     public $ModelView;
     public function __construct() {
         parent::__construct();
@@ -20,19 +20,27 @@ class IndexController extends AbstractController {
         $this->Index();
     }
     public function Index() {
-        $this->ModelView = new IndexModelView;
+        $this->ModelView = new InstallModelView;
+        $this->ModelView->InitData();
         $this->ModelView->ProcessData();
-        $this->ModelView->SendHtml("MainView");
+        $this->ModelView->SendHtml("InstallView");
     }
 }
 
-class IndexModelView extends AbstractModelView{
+class InstallModelView extends AbstractModelView{
     public function __construct() {
         parent::__construct();
         $this->Data=[];
     }
     public function InitData() {
-        ;
+        $this->ViewData["login"]="";
+        $this->ViewData["pass"]="";
+        $this->ViewData["repass"]="";
+        $this->ViewData["host"]="";
+        $this->ViewData["dblogin"]="";
+        $this->ViewData["dbpass"]="";
+        $this->ViewData["dbname"]="";
+        $this->ViewData["dbprefix"]="";
     }
     public function ProcessData() {
         ;

@@ -1,0 +1,116 @@
+<h1><img src="img/logo-s.gif" align="top" /><span> Установка Knauf Order Desk:</span></h1>    
+<div class="dialog-container-static" align="center">
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front no-close ui-dialog-buttons" style="min-width:500px;width:500px;">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span id="ui-id-1" class="ui-dialog-title">Авторизация</span></div>
+                <form class="ui-dialog-content ui-widget-content" name="installform" action="/Application/Install/Install" method="POST">
+                    <table class="form-table">
+                        <tr>
+                            <th colspan="3">Учетная запись</th>
+                        </tr>
+                        <tr>
+                            <td class="label">Логин администратора:</td>
+                            <td><input class="login" type="text" name="login" value="<?php echo $login;?>"/><span></span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Пароль:</td>
+                            <td><input class="password" type="password" name="pass" value="<?php echo $pass;?>" /><span></span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Повторите пароль:</td>
+                            <td><input type="password" name="repass" value="<?php echo $repass;?>"/><span></span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Настройки БД</th>
+                        </tr>
+                        <tr>
+                            <td class="label">Адрес хоста:</td>
+                            <td><input class="any" type="text" name="host" value="<?php echo $host;?>"/><span></span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Учетная запись БД:</td>
+                            <td><input class="any_1-10" type="text" name="dblogin" value="<?php echo $dblogin;?>"/><span></span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Пароль учетной записи БД:</td>
+                            <td><input class="any" type="password" name="dbpass" value="<?php echo $dbpass;?>"/><span></span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Имя базы:</td>
+                            <td><input  class="any" type="text" name="dbname" value="<?php echo $dbname;?>"/><span></span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Префикс таблиц:</td>
+                            <td><input  class="any" type="text" name="dbprefix" value="<?php echo $dbprefix;?>"/><span></span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Другие настройки</th>
+                        </tr>
+                        <tr>
+                            <td class="label">Доступен для записи:</td>
+                            <td>application/config/config.php<span id="file1" class=""></span></td>
+                            <td><button type="button" title ="Обновить" id="refresh" class="ui-button ui-widget ui-helper-clearfix ui-state-default ui-corner-all icon-button"><span class="ui-icon ui-icon-refresh"></span></button></td>
+                        </tr>
+                    </table>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <div class="ui-dialog-buttonset">
+                    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="install" name="action" value="install" type="button" role="button"><span class="ui-button-text">Установить</span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $( document ).ready(function() {
+        $("button").hover(function() {$( this ).addClass( "ui-state-hover" );}, function() {$( this ).removeClass( "ui-state-hover" );});
+        $("input").each(function(i,o){
+            if (validInput($(o))) {
+                $(o).next().removeClass("invalid").addClass("valid");
+                $(o).parent().parent().removeClass("error");
+            }
+            else {
+                $(o).next().removeClass("valid").addClass("invalid");
+                $(o).parent().parent().addClass("error");
+            }
+        });
+        $("input").on('input',function(o){
+            if (validInput($(o.target))) {
+                $(o.target).next().removeClass("invalid").addClass("valid");
+                $(o.target).parent().parent().removeClass("error");
+            }
+            else {
+                $(o.target).next().removeClass("valid").addClass("invalid");
+                $(o.target).parent().parent().addClass("error");
+            }
+            if ($("input[name='repass']").val()!==$("input[name='pass']").val()){
+                $("input[name='repass']").next().removeClass("valid").addClass("invalid");
+                $("input[name='repass']").parent().parent().addClass("error");
+            }
+            else {
+                $("input[name='repass']").next().removeClass("invalid").addClass("valid");
+                $("input[name='repass']").parent().parent().removeClass("error");
+            }
+        });
+        $("#refresh").click(function (){
+            $("#file1").addClass("icon-ajax");
+            ajaxQuery("/install","action=fs&actiontype=async&query=fs",function(json){
+                    $("#file1").removeClass("icon-ajax");
+                    if (json.file1===1) $("#file1").removeClass("invalid").addClass("valid");
+                    else $("#file1").removeClass("valid").addClass("invalid");
+            });
+        });
+        $("#install").click(function(){
+            var nerrors=0;
+            $("form[name='installform']").find(".invalid").each(function(){nerrors=nerrors+1;});
+            if (nerrors>0) alert("На форме есть ошибки ("+nerrors+") исправьте и попробуйте снова");
+            else $("form[name='installform']").submit();
+        });
+    });
+</script>

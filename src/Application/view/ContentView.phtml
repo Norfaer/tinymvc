@@ -1,11 +1,130 @@
+<style>
+table {
+    border-collapse: collapse;
+    text-align: center;
+}
+table, th, td {
+    border: 1px solid black;
+    padding: 2px 4px;
+}
+td.la {
+    min-width: 200px;
+    text-align: left;
+}
+td.ra {
+    text-align: right;
+}
+table th {
+    background: #FFE44F;
+}
+span.sup {
+    vertical-align: super;
+    font-size: 75%;
+}
+td a :visited, td a {
+    color: blue;
+}
+em {
+    font-size: 12px;
+    font-weight: bold;
+    height: 16px;
+    margin-left: 10px;
+    min-width: 16px;
+    padding: 2px;
+    background: green;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    text-align: center;
+    color: white;
+    display: inline-block;
+}
+</style>
 <div id="menu-frame">
-    <?php $this->ShowMenu(); ?>
+    <?php $this->InitUI(); ?>
 </div>
-<div id="error-frame">
-</div>
-<div id="status-frame">
-</div>
-<div id="content-frame">
+<div id="content-wrapper">
+    <div id="vert-nav">
+        <ul class="top-level">
+            <li><a href="#"><i class="icon-doc"></i>Новый</a></li>
+            <li><a href="#"><i class="icon-list"></i>Текущие<em>+2</em></a></li>
+            <li><a href="#"><i class="icon-folder"></i>Архив</a></li>
+            <li><a href="#"><i class="icon-help"></i>Справка</a></li>
+        </ul>
+    </div>
+    <div id="error-frame">
+    </div>
+    <div id="status-frame">
+    </div>
+    <div id="content-frame">
+        <h2>Текущие заказы:</h2>
+        <div class="datagrid">
+            <table id="data-table">
+                <thead>
+                    <th>№ Заказа</th>
+                    <th>№ Счета</th>
+                    <th>Наименование товара</th>
+                    <th>Е.И.</th>
+                    <th>Кол-во</th>
+                    <th>Цена</th>
+                    <th>Стоимость</th>
+                    <th>Сумма</th>
+                    <th>Скачать счет</th>
+                    <th>Отследить</th>
+                    <th><i class="icon-info"></i>Инфо</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td rowspan="3">9023-3233</td>
+                    <td rowspan="3">1342345</td>
+                    <td class="la">ГКП 2500х1200х9,5 (67)</td>
+                    <td>м<span class="sup">2</span></td>
+                    <td>1206</td>
+                    <td class="ra">15,66</td>
+                    <td class="ra">18 885,96</td>
+                    <td rowspan="3">42 539,04</td>
+                    <td rowspan="3"><i class="icon-download"></i></td>
+                    <td rowspan="3"><i class="icon-search"></i></td>
+                    <td rowspan="3"><a href="#">Подробнее...</a></td>
+                </tr>
+                <tr>
+                    <td class="la">ГКПВ 2500х1200х12,5 (55)</td>
+                    <td>м<span class="sup">2</span></td>
+                    <td>825</td>
+                    <td class="ra">17,88</td>
+                    <td class="ra">14 751,00</td>
+                </tr>
+                <tr>
+                    <td class="la">Смесь HP-Старт 30кг. (40)</td>
+                    <td>т.</td>
+                    <td>4,8</td>
+                    <td class="ra">1 854,60</td>
+                    <td class="ra">8 902,08</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">9023-3234</td>
+                    <td rowspan="2">1343858</td>
+                    <td class="la">Смесь МП-75 30кг. (40)</td>
+                    <td>т.</td>
+                    <td>12</td>
+                    <td class="ra">2 050,40</td>
+                    <td class="ra">24 604,80</td>
+                    <td rowspan="2">32 546,40</td>
+                    <td rowspan="2"><i class="icon-download"></i></td>
+                    <td rowspan="2"><i class="icon-search"></i></td>
+                    <td rowspan="2"><a href="#">Подробнее...</a></td>
+                </tr>
+                <tr>
+                    <td class="la">Смесь HP-Финиш 25кг. (40)</td>
+                    <td>т.</td>
+                    <td>4</td>
+                    <td class="ra">1 985,40</td>
+                    <td class="ra">7 941,60</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <div id="debug-frame">
 </div>

@@ -4,22 +4,50 @@
 body {
     padding:0;
     margin:0;
+    background:#e0e0e0;
     text-align:center;
     font-family: Arial,Helvetica,sans-serif;
     font-size: 12px;
 }
 
+#auth-frame {
+    display: inline-block;
+    background: #FFE44F;
+    padding: 10px 15px;
+    margin: 0 35px 10px 0;
+    float: right;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+}
+
+#page-wrapper {
+    margin: 35px 200px 35px 150px;
+    padding: 10px;
+    background: #ffffff;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+}
+
 #top-frame {
-    margin-left: 150px;
-    margin-right:200px;
-    margin-top: 35px;
+    padding: 0;
     border-bottom: 1px solid #b7b7b7;
     text-align:left;
 }
 
+#menu-frame {
+    text-align: center;
+}
+
 #main-frame {
-    margin-right:200px;
-    margin-left: 150px;
 }
 
 #debug-frame {
@@ -29,10 +57,19 @@ body {
 }
 
 #error-frame {
-    margin-right:200px;
     margin-left: 150px;
-    margin-top: 30px;
 }
+
+#content-wrapper {
+}
+
+#content-frame {
+    text-align: left;
+    min-height: 400px;
+    margin-left: 150px;
+    padding: 5px 10px 10px 30px;
+}
+
 /*-----------------------------------------------------------------
 -------------------------------------------------------------------
 -------------------------------------------------------------------*/
@@ -62,150 +99,121 @@ body {
 
 .label {text-align:right;font-weight:bold;margin-left:5px;}
 
-.icon-invalid, .invalid{
-    display:inline-block;
-    padding:0px;
-    margin-left: 5px;
-    width:16px;
-    height:16px;
-    background:url(../img/icon-check.png) 0px 0px no-repeat;
-}
-.icon-valid, .valid{
-    display:inline-block;
-    padding:0px;
-    margin-left: 5px;
-    width:16px;
-    height:16px;
-    background:url(../img/icon-check.png) -16px 0px no-repeat;
-}
 
-.icon-ajax{
-    display:inline-block;
-    padding:0px;
-    margin-left: 5px;
-    width:16px;
-    height:16px;
-    background:url(../img/ajax-loader.gif) 0px 0px no-repeat;
-}
-
-button.icon-button {
-    margin-left: 20px;
-    padding: 4px 0;
-    cursor: pointer;
-}
-
-button span.ui-icon {
-    float: left;
-    margin: 0 4px;
-}
-
-/* Giving a background-color to the nav container. */
+/* ------------Menu----------------- */
 nav { 
-        zoom: 1;
-	font-family: 'Open Sans', sans-serif;
-        margin:10px 0;
-        height: 40px;
-	background-color: #009ED8;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-        border: 1px solid #0084D6;
-        -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
-        -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
-        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
-        display:inline-block;
+    zoom: 1;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40px;
+    background-color: #009ED8;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #0084D6;
+    -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    display:inline-block;
 }
-
-/* Since we'll have the "ul li" "float:left"
- * we need to add a clear after the container. */
-
 nav:after {
-	content:"";
-	display:table;
-	clear:both;
+    content:"";
+    display:table;
+    clear:both;
 }
-
-/* Removing padding, margin and "list-style" from the "ul",
- * and adding "position:reltive" */
 nav ul {
-	padding-left:0;
-	margin:0;
-	list-style: none;
-	position: relative;
-        display: inline-block;
+    padding-left:0;
+    margin:0;
+    list-style: none;
+    position: relative;
+    display: inline-block;
 }
-/* Positioning the navigation items inline */
 nav ul li {
-	margin: 0px;
-	display:inline-block;
-	float: left;
-	background-color: #009ED8;
-        border-right: 1px solid #7AB3D3; 
-	}
-
-/* Styling the links */
+    margin: 0px;
+    display:inline-block;
+    float: left;
+    background-color: #009ED8;
+}
 nav a {
-	display:block;
-	padding:0 10px;	
-	color:#FFF;
-	font-size:20px;
-	line-height: 40px;
-	text-decoration:none;
-        border-right: 1px solid #0084D6;
+    display:block;
+    padding:0 10px;	
+    color:#FFF;
+    font-size:15px;
+    font-weight: bold;
+    line-height: 40px;
+    text-decoration:none;
 }
-
-
-
-
-/* Background color change on Hover */
+nav ul li {
+    border-right: 1px solid #7AB3D3; 
+}
+nav ul li > a {
+    border-right: 1px solid #0084D6;
+}
 nav a:hover { 
-	background-color: #FFFFFF;
-        color: #009ED8;
+    background-color: #FFFFFF;
+    color: #009ED8;
 }
-
 nav a span {
     float:right;
 }
-
-/* Hide Dropdowns by Default
- * and giving it a position of absolute */
 nav ul ul {
-        text-align:left;
-	display: none;
-	position: absolute; 
-	/* has to be the same number as the "line-height" of "nav a" */
-	top: 40px; 
+    text-align:left;
+    display: none;
+    position: absolute; 
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #0084D6;
+    -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    top: 40px; 
 }
-	
-/* Display Dropdowns on Hover */
 nav ul li:hover > ul {
-	display:inherit;
+    display:inherit;
 }
-	
-/* Fisrt Tier Dropdown */
 nav ul ul li {
-	width:170px;
-	float:none;
-	display:list-item;
-	position: relative;
+    width:170px;
+    float:none;
+    display:list-item;
+    position: relative;
+}
+nav ul ul ul {
+    text-align:left;
+    display: none;
+    position: absolute; 
+    left: 170px;
+    top: 0px;
+}
+#vert-nav {
+    font-size:1.5em; 
+    width:150px;
+    text-align: left;
+    float: left;
+    border-left: 1px solid #CCC; 
+}
+#vert-nav ul {
+    padding: 0;
+    margin: 0;
+    border-left: 1px solid #FFF; 
+    width:300px;
+}
+#vert-nav li {
+    list-style: none;
+    padding:8px 0px 20px 40px;
+    margin-left:-33px;
+} 
+#vert-nav a {
+    color: #000;  
+    display:block;  
+    text-decoration:none;
+}
+#vert-nav li:hover {
+    color: #FFF;
+    background:url('../img/nav.png') top left no-repeat;
 }
 
-/* Second, Third and more Tiers	
- * We move the 2nd and 3rd etc tier dropdowns to the left
- * by the amount of the width of the first tier.
-*/
-nav ul ul ul li {
-	position: relative;
-	top:-40px;
-	/* has to be the same number as the "width" of "nav ul ul li" */ 
-	left:170px; 
+#vert-nav li:hover a{
+    color: #FFF;
 }
-
-	
-/* Change ' +' in order to change the Dropdown symbol 
-li.rootmenu > a:after { content:  "\25be"; }
-li > a:after { content:  "\25b8"; }
-li > a:only-child:after { content: ''; }
-/*-----------------------------------------------------------------
--------------------------------------------------------------------
--------------------------------------------------------------------*/

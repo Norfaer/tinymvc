@@ -3,6 +3,7 @@ Options -Indexes
 RewriteRule .{1,}\/css\/(.*) css/$1 [L]
 RewriteRule .{1,}\/img\/(.*) img/$1 [L]
 RewriteRule .{1,}\/js\/(.*) js/$1 [L]
+RewriteRule .{1,}\/font\/(.*) font/$1 [L]
 # The following rule tells Apache that if the requested filename
 # exists, simply serve it.
 RewriteCond %{REQUEST_FILENAME} -s [OR]

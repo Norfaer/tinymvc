@@ -2,12 +2,13 @@
 Routes:
     Index: {controller: IndexController , default: yes}
     Install: {controller: InstallController}
-
+    Content: {controller: ContentController}
 Controllers:
     IndexController : IndexController.php
-    Controller1 : Controller1.php
-
+    InstallController : InstallController.php
+    ContentController: ContentController.php
 Views:
     MainView: MainView.phtml
     ContentView: ContentView.phtml
+    InstallView: InstallView.phtml
     NavView: NavView.phtml
