@@ -82,24 +82,21 @@ body {
     width:100%;
     border-collapse:collapse;
 }
-
 .form-table th, .form-table td {
     padding:5px;
 }
-
 .form-table th {
     text-align: center;
     background:#7fbbfa;
     color: #ffffff;
 }
-
-.form-table tr.error {
-    border: 1px solid red;
+.form-table i.icon-ok {
+    color:blue;
 }
-
+.form-table i.icon-invalid {
+    color:red;
+}
 .label {text-align:right;font-weight:bold;margin-left:5px;}
-
-
 /* ------------Menu----------------- */
 nav { 
     zoom: 1;

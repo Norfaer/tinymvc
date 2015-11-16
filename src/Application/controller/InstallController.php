@@ -33,14 +33,15 @@ class InstallModelView extends AbstractModelView{
         $this->Data=[];
     }
     public function InitData() {
-        $this->ViewData["login"]="";
-        $this->ViewData["pass"]="";
-        $this->ViewData["repass"]="";
-        $this->ViewData["host"]="";
-        $this->ViewData["dblogin"]="";
-        $this->ViewData["dbpass"]="";
-        $this->ViewData["dbname"]="";
-        $this->ViewData["dbprefix"]="";
+        $this->ViewData["login"]= isset($this->Response->Data["login"])? $this->Response->Post["login"] : "";
+        $this->ViewData["pass"] = isset($this->Response->Data["pass"])? $this->Response->Post["pass"] : "";;
+        $this->ViewData["repass"] = isset($this->Response->Data["repass"])? $this->Response->Post["repass"] : "";;
+        $this->ViewData["host"] = isset($this->Response->Data["host"])? $this->Response->Post["host"] : "";;
+        $this->ViewData["dblogin"] = isset($this->Response->Data["dblogin"])? $this->Response->Post["dblogin"] : "";;
+        $this->ViewData["dbpass"] = isset($this->Response->Data[""])? $this->Response->Post[""] : "";;
+        $this->ViewData["dbname"] = isset($this->Response->Data[""])? $this->Response->Post[""] : "";;
+        $this->ViewData["dbprefix"] = isset($this->Response->Data[""])? $this->Response->Post[""] : "";;
+        $this->ViewData[];
     }
     public function ProcessData() {
         ;

@@ -28,15 +28,17 @@ abstract class AbstractModelView {
     public $ViewData;
     public $ViewPath;
     public $Response;
+    public $Request;    
     public $AutoLoader;
     abstract public function InitData();
     abstract public function ProcessData();
     public function __construct() {
-        global $Response, $AutoLoader;
+        global $Response, $AutoLoader, $Request;
         $this->AutoLoader = $AutoLoader;
         $this->Response = $Response;
-        $this->Data=[];
-        $this->ViewData=[];
+        $this->Request = $Request;
+        $this->Data = [];
+        $this->ViewData = [];
     }
     public function SendHtml($view_template,$send_header = true,$extract_data=[]){
         $this->ViewPath=$this->AutoLoader->GetViewPath($view_template);
@@ -55,4 +57,3 @@ abstract class AbstractModelView {
         echo json_encode($this->Data);
     }
 }
-
