@@ -23,7 +23,7 @@ class InstallController extends AbstractController {
         $this->ModelView = new InstallModelView;
         $this->ModelView->InitData();
         $this->ModelView->ProcessData();
-        $this->ModelView->SendHtml("InstallView");
+        $this->ModelView->UpdateAll();
     }
 }
 
@@ -44,5 +44,11 @@ class InstallModelView extends AbstractModelView{
     }
     public function ProcessData() {
         ;
+    }
+    public function UpdateAll() {
+        $this->SendHtml("MainView");
+    }
+    public function UpdateContent() {
+        $this->SendHtml("InstallView",false,$this->ViewData);
     }
 }

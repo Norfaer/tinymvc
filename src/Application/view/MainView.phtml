@@ -28,13 +28,14 @@
             <div id="loader-block" style="display: none;">
             </div>
             <div id="main-frame">
+                <?php $this->UpdateContent(); ?>
             </div>
         </div>
-        <script>
+<!--        <script>
             $(document).ready(function(){
                 $("#loader").show();
                 $("#main-frame").load("/Application/Content",function(){$("#loader").hide();});			
           });
-	</script>
+	</script> -->
     </body>
 </html>

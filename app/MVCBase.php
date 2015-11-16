@@ -38,14 +38,14 @@ abstract class AbstractModelView {
         $this->Data=[];
         $this->ViewData=[];
     }
-    public function SendHtml($view_template,$send_header = true){
+    public function SendHtml($view_template,$send_header = true,$extract_data=[]){
         $this->ViewPath=$this->AutoLoader->GetViewPath($view_template);
         if ($send_header){
             $this->Response->SetCache(CACHE_OFF);
             $this->Response->SetContentType(HCTYPE_HTML);
             $this->Response->Send();
         }
-        extract($this->ViewData);
+        if (is_array($extract_data) && !empty($extract_data)) extract($extract_data);
         require($this->ViewPath);
     }
     public function SendJson(){
