@@ -55,7 +55,7 @@
                         </tr>
                         <tr>
                             <td class="label">Доступен для записи:</td>
-                            <td>config/config.php<i id="file1" class="icon-ok"></i></td>
+                            <td>config/config.php<i id="fileflag" class="<?php echo $fileflag ?>"></i></td>
                             <td><button type="button" title ="Обновить" id="refresh" class="ui-button ui-widget ui-helper-clearfix ui-state-default ui-corner-all icon-button"><span class="ui-icon ui-icon-refresh"></span></button></td>
                         </tr>
                     </table>
@@ -93,12 +93,23 @@
             }
         });
         $("#refresh").click(function (){
-            $("#file1").removeClass("icon-ok").removeClass("icon-invalid");
-            $("#file1").addClass("icon-spin").addClass("animate-spin");
-            ajaxQuery("/install","action=fs&actiontype=async&query=fs",function(json){
-                    $("#file1").removeClass("icon-ajax");
-                    if (json.file1===1) $("#file1").removeClass("icon-invalid").addClass("icon-ok");
-                    else $("#file1").removeClass("icon-ok").addClass("icon-invalid");
+            $("#fileflag").removeClass("icon-ok").removeClass("icon-invalid");
+            $("#fileflag").addClass("icon-spin").addClass("animate-spin");
+//            ajaxQuery("/Application/Install/GetFileStatus/","",function(json){
+//                    $("#fileflag").removeClass("icon-ajax");
+//                    if (json.file1===1) $("#fileflag").removeClass("icon-invalid").addClass("icon-ok");
+//                    else $("#fileflag").removeClass("icon-ok").addClass("icon-invalid");
+//            });
+            $.ajax({
+                cache:false,
+                type:"POST",
+                url:"/Application/Install/GetFileStatus",
+                success:function(json){
+                    $("#fileflag").removeClass("icon-spin").removeClass("animate-spin");
+                    if (json.FileStatus==="1") $("#fileflag").removeClass("icon-invalid").addClass("icon-ok");
+                    else $("#fileflag").removeClass("icon-ok").addClass("icon-invalid");
+                },
+                dataType:'json'
             });
         });
         $("#install").click(function(){

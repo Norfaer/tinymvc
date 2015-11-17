@@ -1,10 +1,10 @@
 function ajaxQuery(myurl,params,func)
 {
-    var rurl=myurl+'?rand='+Math.random();
+//    var rurl=myurl+'?rand='+Math.random();
     $.ajax({
         cache:false,
         type:"POST",
-        url:rurl,
+        url:myurl,
         data:params,
         success:func,
         dataType:'json'

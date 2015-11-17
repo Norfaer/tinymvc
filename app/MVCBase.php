@@ -50,10 +50,10 @@ abstract class AbstractModelView {
         if (is_array($extract_data) && !empty($extract_data)) extract($extract_data);
         require($this->ViewPath);
     }
-    public function SendJson(){
+    public function SendJson($json){
         $this->Response->SetCache(CACHE_OFF);
         $this->Response->SetContentType(HCTYPE_JSON);
         $this->Response->Send();
-        echo json_encode($this->Data);
+        echo json_encode($json);
     }
 }
