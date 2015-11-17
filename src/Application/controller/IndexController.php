@@ -32,7 +32,7 @@ class IndexModelView extends AbstractModelView{
     public function __construct() {
         parent::__construct();
         $this->Data=[
-            "Menu" => [
+            "MainMenu" => [
                 "Item1" => ["item"=>"Главная","icon"=>"icon-home","link"=>"/Application/"],
                 "Item2" => ["item"=>"Заказы","icon"=>"icon-truck","link"=>"#", "submenu" => [
                         "Item21" => ["item"=>"Новый...","icon"=>"icon-doc","link"=>"#"],
@@ -42,6 +42,12 @@ class IndexModelView extends AbstractModelView{
                 "Item4" => ["item"=>"Инструменты","icon"=>"icon-cog","link"=>"#"],
                 "Item5" => ["item"=>"Справка","icon"=>"icon-help","link"=>"#"],
                 "Item6" => ["item"=>"Профиль","icon"=>"icon-user","link"=>"#"]
+            ],
+            "NavMenu" =>[
+                "Item1" => ["item"=>"Новый...","icon"=>"icon-doc","link"=>"#"],
+                "Item2" => ["item"=>"Текущие","icon"=>"icon-list","link"=>"#"],
+                "Item3" => ["item"=>"Архив","icon"=>"icon-folder","link"=>"#"],
+                "Item4" => ["item"=>"Справка","icon"=>"icon-help","link"=>"#"]
             ]
         ];
     }
@@ -57,7 +63,10 @@ class IndexModelView extends AbstractModelView{
     public function UpdateContent() {
         $this->SendHtml("ContentView",false);
     }
-    public function InitUI() {
-        Html::html_nav($this->Data["Menu"]);
+    public function InitMainMenu() {
+        Html::html_nav($this->Data["MainMenu"]);
+    }
+    public function InitVertMenu() {
+        Html::html_nav($this->Data["NavMenu"]);
     }
 }

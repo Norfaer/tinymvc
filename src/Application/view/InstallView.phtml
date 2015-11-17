@@ -55,7 +55,7 @@
                         </tr>
                         <tr>
                             <td class="label">Доступен для записи:</td>
-                            <td>config/config.php<i id="fileflag" class="<?php echo $fileflag ?>"></i></td>
+                            <td>config/config_db.yml<i id="fileflag" class="<?php echo $fileflag ?>"></i></td>
                             <td><button type="button" title ="Обновить" id="refresh" class="ui-button ui-widget ui-helper-clearfix ui-state-default ui-corner-all icon-button"><span class="ui-icon ui-icon-refresh"></span></button></td>
                         </tr>
                     </table>
@@ -95,11 +95,6 @@
         $("#refresh").click(function (){
             $("#fileflag").removeClass("icon-ok").removeClass("icon-invalid");
             $("#fileflag").addClass("icon-spin").addClass("animate-spin");
-//            ajaxQuery("/Application/Install/GetFileStatus/","",function(json){
-//                    $("#fileflag").removeClass("icon-ajax");
-//                    if (json.file1===1) $("#fileflag").removeClass("icon-invalid").addClass("icon-ok");
-//                    else $("#fileflag").removeClass("icon-ok").addClass("icon-invalid");
-//            });
             $.ajax({
                 cache:false,
                 type:"POST",

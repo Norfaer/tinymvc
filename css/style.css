@@ -98,7 +98,7 @@ body {
 }
 .label {text-align:right;font-weight:bold;margin-left:5px;}
 /* ------------Menu----------------- */
-nav { 
+#menu-frame nav { 
     zoom: 1;
     font-family: 'Open Sans', sans-serif;
     margin-top: 10px;
@@ -114,25 +114,25 @@ nav {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
     display:inline-block;
 }
-nav:after {
+#menu-frame nav:after {
     content:"";
     display:table;
     clear:both;
 }
-nav ul {
+#menu-frame nav ul {
     padding-left:0;
     margin:0;
     list-style: none;
     position: relative;
     display: inline-block;
 }
-nav ul li {
+#menu-frame nav ul li {
     margin: 0px;
     display:inline-block;
     float: left;
     background-color: #009ED8;
 }
-nav a {
+#menu-frame nav a {
     display:block;
     padding:0 10px;	
     color:#FFF;
@@ -141,20 +141,20 @@ nav a {
     line-height: 40px;
     text-decoration:none;
 }
-nav ul li {
+#menu-frame nav ul li {
     border-right: 1px solid #7AB3D3; 
 }
-nav ul li > a {
+#menu-frame nav ul li > a {
     border-right: 1px solid #0084D6;
 }
-nav a:hover { 
+#menu-frame nav a:hover { 
     background-color: #FFFFFF;
     color: #009ED8;
 }
-nav a span {
+#menu-frame nav a span {
     float:right;
 }
-nav ul ul {
+#menu-frame nav ul ul {
     text-align:left;
     display: none;
     position: absolute; 
@@ -167,16 +167,16 @@ nav ul ul {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
     top: 40px; 
 }
-nav ul li:hover > ul {
+#menu-frame nav ul li:hover > ul {
     display:inherit;
 }
-nav ul ul li {
+#menu-frame nav ul ul li {
     width:170px;
     float:none;
     display:list-item;
     position: relative;
 }
-nav ul ul ul {
+#menu-frame nav ul ul ul {
     text-align:left;
     display: none;
     position: absolute; 

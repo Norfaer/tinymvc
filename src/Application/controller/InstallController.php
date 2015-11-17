@@ -45,10 +45,10 @@ class InstallModelView extends AbstractModelView{
         $this->ViewData["dbpass"] = isset($this->Response->Data["dbpass"])? $this->Response->Post["dbpass"] : "";
         $this->ViewData["dbname"] = isset($this->Response->Data["dbname"])? $this->Response->Post["dbname"] : "";
         $this->ViewData["dbprefix"] = isset($this->Response->Data["dbprefix"])? $this->Response->Post["dbprefix"] : "";
-        $this->ViewData["fileflag"]= is_writable("config/config.yml")? "icon-ok" : "icon-invalid";
+        $this->ViewData["fileflag"]= is_writable("config/config_db.yml")? "icon-ok" : "icon-invalid";
     }
     public function GetFileStatus() {
-        $json["FileStatus"] = is_writable("config/config.yml")? "1":"0";
+        $json["FileStatus"] = is_writable("config/config_db.yml")? "1":"0";
         $this->SendJson($json);
     }
     public function ProcessData() {

@@ -11,20 +11,20 @@ class Html {
     static public function html_enquote($expr) {
         return '"'.$expr.'"';
     }
+    static function html_menu_r($menuitem) {
+        echo "<ul>";
+            foreach ($menuitem As $menuparams) {
+                echo "<li><a href=".Html::html_enquote($menuparams["link"])."><i class=".Html::html_enquote($menuparams["icon"])."></i>".$menuparams["item"]."</a>";
+                if (isset($menuparams["submenu"])){
+                        Html::html_menu_r($menuparams["submenu"]);
+                }
+                echo "</li>";
+            }   
+        echo "</ul>";
+    }
     static public function html_nav($menu) {
-        function html_menu_r($menuitem) {
-            echo "<ul>";
-                foreach ($menuitem As $menuparams) {
-                    echo "<li><a href=".html::html_enquote($menuparams["link"])."><i class=".html::html_enquote($menuparams["icon"])."></i>".$menuparams["item"]."</a>";
-                    if (isset($menuparams["submenu"])){
-                            html_menu_r($menuparams["submenu"]);
-                    }
-                    echo "</li>";
-                }   
-            echo "</ul>";
-        }
         echo "<nav>";
-        html_menu_r($menu);
+        Html::html_menu_r($menu);
         echo "</nav>";
     }
 }
