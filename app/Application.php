@@ -12,6 +12,7 @@ include_once "app/Session.php";
 include_once "app/Autoloader.php";
 //require_once "app/Utils.php";
 include_once "app/Spyc.php";
+include_once "app/Debugger.php";
 
 use Tiny\HttpBase\Request;
 use Tiny\Router\Router;

@@ -1,5 +1,6 @@
+---
 host: localhost
 dblogin: root
 dbpass: only4men
-dbname: knauf_db
-dbprefix: cl_
+dbname: knauf
+dbprefix: od_

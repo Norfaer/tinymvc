@@ -13,8 +13,14 @@ class AutoLoader
     private $RouteMap;
     private $ClassMap;
     private $ViewMap;
+    private $DB;
     public function __construct() {
         $this->ClassMap=[];$this->ModuleMap=[];$this->RouteMap=[];$this->ViewMap=[];
+    }
+    public function IsInstalled() {
+        if (isset($this->DB["host"])&&isset($this->DB["dblogin"])&&isset($this->DB[""])&&isset($this->DB[""])) {
+            
+        }
     }
     public function ModuleExist($module) {
         foreach ($this->ModuleMap As $key => $value){
@@ -76,6 +82,7 @@ class AutoLoader
             $this->ModuleMap[$modulename]["default"] = isset($moduleparams["default"]) ? $moduleparams["default"]:false;
             $this->ModuleMap[$modulename]["namespace"]=isset($moduleparams["namespace"]) ? $moduleparams["namespace"]:"Module\\".$modulename;
         }
+        $this->DB = spyc_load_file("config/config_db.yml");
     }
     public function ValidateConfig($config) {
     }
