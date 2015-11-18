@@ -24,7 +24,7 @@ class IndexController extends AbstractController {
     public function Index() {
         $this->ModelView = new IndexModelView;
         $this->ModelView->ProcessData();
-        $this->ModelView->UpdateAll();
+        $this->ModelView->SendTemplate();
     }
 }
 
@@ -43,7 +43,7 @@ class IndexModelView extends AbstractModelView{
                 "Item5" => ["item"=>"Справка","icon"=>"icon-help","link"=>"#"],
                 "Item6" => ["item"=>"Профиль","icon"=>"icon-user","link"=>"#"]
             ],
-            "NavMenu" =>[
+            "SubMenu" =>[
                 "Item1" => ["item"=>"Новый...","icon"=>"icon-doc","link"=>"#"],
                 "Item2" => ["item"=>"Текущие","icon"=>"icon-list","link"=>"#"],
                 "Item3" => ["item"=>"Архив","icon"=>"icon-folder","link"=>"#"],
@@ -57,16 +57,16 @@ class IndexModelView extends AbstractModelView{
     public function ProcessData() {
         ;
     }
-    public function UpdateAll() {
-        $this->SendHtml("MainView");
+    public function SendTemplate() {
+        $this->SendHtml("Template");
     }
-    public function UpdateContent() {
-        $this->SendHtml("ContentView",false);
+    public function SendMainFrame() {
+        $this->SendHtml("MainFrame",false);
     }
-    public function InitMainMenu() {
-        Html::html_nav($this->Data["MainMenu"]);
+    public function SendContent() {
+        
     }
-    public function InitVertMenu() {
-        Html::html_nav($this->Data["NavMenu"]);
+    public function InitMenu($menuname) {
+        Html::html_nav($this->Data[$menuname]);
     }
 }

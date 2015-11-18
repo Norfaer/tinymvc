@@ -17,6 +17,10 @@ use Tiny\HttpBase\Request;
 use Tiny\Router\Router;
 use Tiny\Session\Session;
 
+function app_error_handler($errno , $errstr , $errfile="", $errline=0, $errcontext=[]) {
+    throw new Exception($errstr, $errno);
+}
+
 class Application
 {
     private $AutoLoader;
@@ -24,7 +28,9 @@ class Application
     private $Request;
     private $Response;
     private $Session;
+    private $Debug;
     public function __construct($config_path="config/config.yml") {
+        set_error_handler(app_error_handler, E_ALL);
         global $AutoLoader, $Request, $Response, $Session;
         $this->AutoLoader = $AutoLoader;
         $this->Request = $Request;
@@ -41,5 +47,11 @@ class Application
         $this->Session->Start();
         $this->Router = new Router();
         $this->Router->RouteURI($this->Request->Uri);
+    }
+    public function Debug($key,$val) {
+        $this->Debug[$key]=$val;
+    }
+    public function ShowDebug() {
+        var_dump($this->Debug);
     }
 }

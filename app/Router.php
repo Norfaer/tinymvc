@@ -5,6 +5,9 @@ namespace Tiny\Router;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+use Exception;
+
 class Router {
     private $RouteMap;
     private $AutoLoader;
@@ -27,7 +30,9 @@ class Router {
             $this->QueryString = !empty($matches[6])? $matches[6] : "";
             return $this->ModuleRoute."/".$this->ControllerRoute;
         }
-        return false;
+        else {
+            throw new Exception("Неверный маршрут : " . $uri, 404);
+        }
     }
     public function StdRoute($route) {
         if ($this->AutoLoader->ModuleExist($this->ModuleRoute)) {
@@ -37,18 +42,23 @@ class Router {
                 $ClassName=$this->RouteMap[$route];
                 $this->AutoLoader->LoadClass($ClassName);
                 $CtrlObj = new $ClassName;
+                if ($CtrlObj===null){throw new Exception("Ошибка создания объекта класса" . $ClassName, 404);}
                 $ActionName = $this->Action;
-                if ($CtrlObj->HasAction($ActionName)){
-                    $CtrlObj->$ActionName();
-                    return true;
-                }
+                if ($CtrlObj->HasAction($ActionName)) {$CtrlObj->$ActionName();}
+                else {throw new Exception("Действие " . $ActionName . " не найдено в " . $ClassName, 404);}
             }
+            else {throw new Exception("Маршрут " . $route . " не найден", 404);}
         }
-        return false;
+        else {throw new Exception("Модуль ".$this->ModuleRoute." не удалось загрузить", 404);}
     }
     public function RouteURI($uri) {
-        $route = $this->ParseUri($uri);
-        $this->StdRoute($route);
-        return false;
+        try {
+            $route = $this->ParseUri($uri);
+            $this->StdRoute($route);
+        }
+        catch (Exception $e)
+        {
+            echo $e->getMessage();
+        }
     }
 }

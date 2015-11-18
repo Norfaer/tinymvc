@@ -1,0 +1,17 @@
+<div id="menu-frame">
+    <?php $this->InitMenu("MainMenu"); ?>
+</div>
+<div id="content-wrapper">
+    <div id="vert-nav">
+        <?php $this->InitMenu("SubMenu"); ?>
+    </div>
+    <div id="error-frame">
+    </div>
+    <div id="status-frame">
+    </div>
+    <div id="content-frame">
+        <?php $this->SendContent(); ?>
+    </div>
+</div>
+<div id="debug-frame">
+</div>

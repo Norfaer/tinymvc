@@ -8,7 +8,7 @@ Controllers:
     InstallController : InstallController.php
     ContentController: ContentController.php
 Views:
-    MainView: MainView.phtml
-    ContentView: ContentView.phtml
+    Template: TemplateView.phtml
+    MainFrame: MainFrameView.phtml
+    ErrorView: ErrorView.phtml
     InstallView: InstallView.phtml
-    NavView: NavView.phtml

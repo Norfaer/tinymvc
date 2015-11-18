@@ -26,10 +26,12 @@ abstract class AbstractController {
 abstract class AbstractModelView {
     public $Data;
     public $ViewData;
-    public $ViewPath;
     public $Response;
     public $Request;    
     public $AutoLoader;
+    public $ErrorCode;
+    public $ErrorMsg;
+    public $StatusMsg;
     abstract public function InitData();
     abstract public function ProcessData();
     public function __construct() {
@@ -39,16 +41,19 @@ abstract class AbstractModelView {
         $this->Request = $Request;
         $this->Data = [];
         $this->ViewData = [];
+        $this->ErrorCode=0;
+        $this->ErrorMsg="";
+        $this->StatusMsg="";
     }
     public function SendHtml($view_template,$send_header = true,$extract_data=[]){
-        $this->ViewPath=$this->AutoLoader->GetViewPath($view_template);
+        $view_path=$this->AutoLoader->GetViewPath($view_template);
         if ($send_header){
             $this->Response->SetCache(CACHE_OFF);
             $this->Response->SetContentType(HCTYPE_HTML);
             $this->Response->Send();
         }
         if (is_array($extract_data) && !empty($extract_data)) extract($extract_data);
-        require($this->ViewPath);
+        require($view_path);
     }
     public function SendJson($json){
         $this->Response->SetCache(CACHE_OFF);

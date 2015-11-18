@@ -57,7 +57,8 @@ body {
 }
 
 #error-frame {
-    margin-left: 150px;
+    display:inline-block;
+    padding: 10px 0;
 }
 
 #content-wrapper {

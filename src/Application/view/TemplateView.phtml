@@ -23,7 +23,10 @@
             <div id="loader-block" style="display: none;">
             </div>
             <div id="main-frame">
-                <?php $this->UpdateContent(); ?>
+                <?php $this->SendMainFrame(); ?>
+            </div>
+            <div id="debug-frame">
+                <?php $this->Debug();?>
             </div>
         </div>
 <!--        <script>
