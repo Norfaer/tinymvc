@@ -10,8 +10,7 @@ include_once "app/Debugger.php";
 
 use Tiny\MVCBase\AbstractController;
 use Tiny\MVCBase\AbstractModelView;
-use mysqli;
-
+use PDO;
 
 class InstallController extends AbstractController {
     public $ModelView;
@@ -56,6 +55,8 @@ class InstallModelView extends AbstractModelView {
         $this->ViewData["dbname"] = isset($this->Request->Post["dbname"])? $this->Request->Post["dbname"] : "";
         $this->ViewData["dbprefix"] = isset($this->Request->Post["dbprefix"])? $this->Request->Post["dbprefix"] : "";
         $this->ViewData["fileflag"]= is_writable("config/config_db.yml")? "icon-ok" : "icon-invalid";
+        global $Debugger;
+        $Debugger->Debug("PDO",PDO::getAvailableDrivers());
     }
     
     public function Install() {
@@ -71,6 +72,7 @@ class InstallModelView extends AbstractModelView {
         $str = spyc_dump($db_config);
         fwrite($fp, "---".PHP_EOL.$str);
         fclose($fp);
+        $pdo = new PDO();
         $mysqli = new mysqli($db_config["host"],$db_config["dblogin"],$db_config["dbpass"]);
         $mysqli->set_charset('utf8');
         $mysqli->query('CREATE DATABASE IF NOT EXISTS '.$db_config["dbname"]);
@@ -86,8 +88,6 @@ class InstallModelView extends AbstractModelView {
         $salt = substr(sha1($login), 10, 20)."\3\1\2\6";
         $hashpass = sha1(sha1($pass).$salt);
         $query = 'INSERT INTO '.$db_config["dbprefix"].'auth  (login, password, priv, active) VALUES ("' . $login . '","' . $hashpass  . '",' ."0" . ',1)';
-        global $Debugger;
-        $Debugger->Debug("query",$query);
         $mysqli->query($query);
         $mysqli->close();
     }
