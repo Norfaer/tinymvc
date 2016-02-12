@@ -72,12 +72,12 @@ class InstallModelView extends AbstractModelView {
         $str = spyc_dump($db_config);
         fwrite($fp, "---".PHP_EOL.$str);
         fclose($fp);
-        $pdo = new PDO();
-        $mysqli = new mysqli($db_config["host"],$db_config["dblogin"],$db_config["dbpass"]);
-        $mysqli->set_charset('utf8');
-        $mysqli->query('CREATE DATABASE IF NOT EXISTS '.$db_config["dbname"]);
-        $mysqli->select_db($db_config["dbname"]);
-        $mysqli->query('CREATE TABLE IF NOT EXISTS '.$db_config["dbprefix"].'auth
+        $pdo = new PDO("mysql:host=".$db_config["host"].";charset=utf8", $db_config["dblogin"], $db_config["dbpass"]);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->exec("SET NAMES utf8");
+        $pdo->query('CREATE DATABASE IF NOT EXISTS '.$db_config["dbname"]);
+        $pdo->query("USE ".$db_config["dbname"]);
+        $pdo->query('CREATE TABLE IF NOT EXISTS '.$db_config["dbprefix"].'auth
     (id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     priv BIGINT UNSIGNED NOT NULL DEFAULT "2",
     login VARCHAR(16) NOT NULL DEFAULT "",
@@ -88,8 +88,8 @@ class InstallModelView extends AbstractModelView {
         $salt = substr(sha1($login), 10, 20)."\3\1\2\6";
         $hashpass = sha1(sha1($pass).$salt);
         $query = 'INSERT INTO '.$db_config["dbprefix"].'auth  (login, password, priv, active) VALUES ("' . $login . '","' . $hashpass  . '",' ."0" . ',1)';
-        $mysqli->query($query);
-        $mysqli->close();
+        $pdo->query($query);
+        $pdo=null;
     }
     
     public function GetFileStatus() {
