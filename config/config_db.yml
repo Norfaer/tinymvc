@@ -1,6 +1,0 @@
----
-host: localhost
-dblogin: root
-dbpass: only4men
-dbname: client_db
-dbprefix: cl_

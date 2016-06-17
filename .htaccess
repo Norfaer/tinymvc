@@ -1,21 +1,30 @@
+# 1.To use URL Alias you need to be running apache with mod_rewrite enabled.
+
+# 2. In your opencart directory rename htaccess.txt to .htaccess.
+
+# For any support issues please visit: http://www.opencart.com
+
+Options All +FollowSymlinks
+
+# Prevent Directoy listing
+Options All -Indexes
+<IfModule mod_php5.c>
+    php_value short_open_tag 1
+</IfModule>
+# Prevent Direct Access to files
+<FilesMatch "(?i)((\.tpl|\.ini|\.log|(?<!robots)\.txt))">
+ Order deny,allow
+ Deny from all
+</FilesMatch>
+
+# SEO URL Settings
 RewriteEngine On
-Options -Indexes
-RewriteRule .{1,}\/css\/(.*) css/$1 [L]
-RewriteRule .{1,}\/img\/(.*) img/$1 [L]
-RewriteRule .{1,}\/js\/(.*) js/$1 [L]
-RewriteRule .{1,}\/font\/(.*) font/$1 [L]
-# The following rule tells Apache that if the requested filename
-# exists, simply serve it.
-RewriteCond %{REQUEST_FILENAME} -s [OR]
-RewriteCond %{REQUEST_FILENAME} -l [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^.*$ - [NC,L]
-# The following rewrites all other queries to index.php. The 
-# condition ensures that if you are using Apache aliases to do
-# mass virtual hosting, the base path will be prepended to 
-# allow proper resolution of the index.php file; it will work
-# in non-aliased environments as well, providing a safe, one-size 
-# fits all solution.
-RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
-RewriteRule ^(.*) - [E=BASE:%1]
-RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
+# If your opencart installation does not run on the main web folder make sure you folder it does run in ie. / becomes /shop/
+
+RewriteBase /
+RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap [L]
+RewriteRule ^googlebase.xml$ index.php?route=feed/google_base [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
+RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]

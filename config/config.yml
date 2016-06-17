@@ -1,4 +1,0 @@
----
-modules:
-    Application: {default: yes}
-    Module1:

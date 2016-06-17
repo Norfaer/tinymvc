@@ -1,8 +1,0 @@
----
-Routes:
-    Index: {controller: IndexController , default: yes}
-    Install: {controller: InstallController}
-
-Controllers:
-    IndexController : IndexController.php
-    InstallController : InstallController.php
