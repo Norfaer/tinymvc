@@ -5,6 +5,9 @@ chdir(__DIR__);
 
 require_once 'core/autoloader.class.php';
 
+if (file_exists('config.php')) {
+    require_once 'config.php';
+}
 
 $autoloader = Autoloader::getInstance();
 $registry = Registry::getInstance();

@@ -34,9 +34,9 @@ class TplSimple {
         $__short = ini_get('short_open_tag');
         extract($__data);
         ob_start();
-        ini_set('short_open_tag', '1');
-        include $__path;
-        ini_set('short_open_tag', $__short);
+        if (file_exists($__path)) {
+            include $__path;
+        }
         return $__echo ? ob_end_flush() : ob_get_clean();
     }
 }

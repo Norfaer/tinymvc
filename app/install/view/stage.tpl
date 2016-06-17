@@ -8,7 +8,7 @@
                     <tr>
                         <?foreach($php_settings_header as $header):?>
                         <th><?=$header?></th>
-                        <?endforeach;?>
+                        <?endforeach?>
                     </tr>
                 </thead>
                 <tbody>
@@ -16,9 +16,9 @@
                     <tr>
                         <?foreach($row as $val):?>
                         <td><?=$val?></td>
-                        <?endforeach;?>
+                        <?endforeach?>
                     </tr>
-                    <?endforeach;?>
+                    <?endforeach?>
                 </tbody>
             </table>           
         </div>
