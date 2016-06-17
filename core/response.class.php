@@ -5,10 +5,8 @@
  * Author: Alexander Firsov  * 
  */
 
-namespace Http;
-
 class Response {
-        use \Singleton;
+        use Singleton;
 	private $headers = [];
 	private $level = 0;
 	private $output;

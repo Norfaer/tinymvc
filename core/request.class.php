@@ -5,10 +5,8 @@
  * Author: Alexander Firsov  * 
  */
 
-namespace Http;
-
 class Request {
-        use \Singleton;
+        use Singleton;
 	public $get = [];
 	public $post = [];
 	public $cookie = [];

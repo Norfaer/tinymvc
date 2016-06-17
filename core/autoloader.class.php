@@ -19,7 +19,7 @@ class Autoloader {
     }
     
     public function controller($mcpath, $data=[]) {
-        $path = $this->application.'/controller/'.$mcpath.'.php';
+        $path = 'app/'.$this->application.'/controller/'.$mcpath.'.php';
         if (file_exists($path)) {
             require_once $path;
             $split = explode('/', $mcpath);
@@ -30,7 +30,7 @@ class Autoloader {
     }
 
     public function model($mmpath, $data=[]) {
-        $path = $this->application.'/model/'.$mmpath.'.php';
+        $path = 'app/'.$this->application.'/model/'.$mmpath.'.php';
         if (file_exists($path)) {
             require_once $path;
             $split = explode('/', $mmpath);
@@ -41,13 +41,13 @@ class Autoloader {
     }
 
     public function view($block, $mvpath, &$data) {
-        $path = $this->application . '/view/' . $mvpath . '.tpl';
+        $path = 'app/'.$this->application . '/view/' . $mvpath . '.tpl';
         $layout = TplSimple::getInstance();
         $layout->addBlock($block, $path, $data);
     }
     
     public function language($mlpath) {
-        $path = $this->application.'/language/'.$this->language->get().'/'.$mlpath.'.php';
+        $path = 'app/'.$this->application.'/language/'.$this->language->get().'/'.$mlpath.'.php';
         if (file_exists($path)){
             $_=[];
             require_once $path;
