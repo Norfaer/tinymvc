@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-    <?=$this->block('content')?>
+    <? ::block('content') ?>
 </div>
 </body>
 </html>

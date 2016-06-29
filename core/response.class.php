@@ -10,7 +10,10 @@ class Response {
 	private $headers = [];
 	private $level = 0;
 	private $output;
-        private $type;
+        
+        public function init() {
+            ob_start(NULL, 0, PHP_OUTPUT_HANDLER_CLEANABLE);
+        }
 
 	public function addHeader($header) {
 		$this->headers[] = $header;
@@ -36,6 +39,9 @@ class Response {
         public function setType($type) {
             if ($type=='html') {
                 $this->addHeader('Content-Type: text/html; charset=utf-8');
+            }
+            else if ($type=='xml') {
+                $this->addHeader('Content-Type: text/xml; charset=utf-8');
             }
             else if ($type=='json') {
                 $this->addHeader('Content-Type: application/json; charset=utf-8');
@@ -73,6 +79,7 @@ class Response {
 	}
 
 	public function output() {
+                $this->output = ob_get_clean();
 		if ($this->output) {
 			if ($this->level) {
 				$output = $this->compress($this->output, $this->level);

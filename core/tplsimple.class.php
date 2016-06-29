@@ -14,29 +14,21 @@ class TplSimple {
     }
     
     public function addBlock($block, $path, &$data) {
-        $this->blocks[$block]['path'] = $path;
-        $this->blocks[$block]['data'] = &$data;
+        $this->blocks[$block][] = ['path'=>$path,'data'=>&$data];
     }
-    
-    private function block($block) {
-        if (isset($this->blocks[$block])) {
-            $this->render($this->blocks[$block]['path'],$this->blocks[$block]['data'], true);
-        }
-    }
-    
+        
     public function renderBlock($block) {
         if (isset($this->blocks[$block])) {
-            $this->render($this->blocks[$block]['path'],$this->blocks[$block]['data'], true);
+            foreach ($this->blocks[$block] as &$piece){
+                $this->render($piece['path'],$piece['data']);
+            }
         }
     }
     
-    public function render($__path, $__data = [], $__echo = false) {
-        $__short = ini_get('short_open_tag');
+    public function render($__path, &$__data) {
         extract($__data);
-        ob_start();
         if (file_exists($__path)) {
-            include $__path;
+            include 'tpl://'.$__path;
         }
-        return $__echo ? ob_end_flush() : ob_get_clean();
     }
 }

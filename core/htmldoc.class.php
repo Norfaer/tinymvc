@@ -5,15 +5,29 @@
  * Author: Alexander Firsov  * 
  */
 
-class HtmlDoc implements ArrayAccess {
+class HtmlDoc implements ArrayAccess{
     use Singleton;
     
     private $container=[];
     
     public function init() {
+        stream_wrapper_register("tpl", "TplPipe");                
         $this->container['scripts']=[];
         $this->container['styles']=[];
+        $this->container['meta']=[];
         $this->container['title']='Default page title';
+    }
+    
+    public function addScript($src) {
+        $this->container['scripts'][] = $src;
+    }
+    
+    public function addStyle($src) {
+        $this->container['styles'][] = $src;
+    }
+    
+    public function setTitle($title) {
+        $this->container['title'] = $title;
     }
 
     public function offsetSet($offset, $value) {

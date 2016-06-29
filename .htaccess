@@ -8,9 +8,6 @@ Options All +FollowSymlinks
 
 # Prevent Directoy listing
 Options All -Indexes
-<IfModule mod_php5.c>
-    php_value short_open_tag 1
-</IfModule>
 # Prevent Direct Access to files
 <FilesMatch "(?i)((\.tpl|\.ini|\.log|(?<!robots)\.txt))">
  Order deny,allow
