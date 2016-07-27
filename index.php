@@ -2,7 +2,6 @@
 try {
     define('VERSION', '1.0.0a');
     chdir(__DIR__);
-
     require_once 'core/helper/error.php';
     require_once 'core/autoloader.class.php';
 
